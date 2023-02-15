@@ -28,7 +28,7 @@ Spiders do folowing :
 
 }
 
-How to build:
+HOW TO BUILD:
 
 In a new vnv:
 
