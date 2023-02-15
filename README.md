@@ -12,6 +12,7 @@ Spiders do folowing :
 - parse of the html
 - collect the data,
 - output the data as json file, in folowing format:
+
 {
 "loc-language": String, # only for localised version
 "name": String,
