@@ -14,7 +14,8 @@ Spiders do folowing :
 - output the data as json file, in folowing format:
 
 {
-"loc-language": String, # only for localised version
+
+"loc-language": String,      # only for localised version
 "name": String,
 
 "price": Double,
