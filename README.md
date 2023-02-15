@@ -16,7 +16,7 @@ Spiders do folowing :
 
 {
 
-"loc-language": String,      # only for localised version
+"loc-language": String,      # only in localised version
 
 "name": String,
 
