@@ -24,6 +24,7 @@ Spiders do folowing :
 "color": String,
 
 "size": Array,
+
 }
 
 How to build:
