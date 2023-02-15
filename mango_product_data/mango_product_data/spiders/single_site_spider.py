@@ -1,10 +1,12 @@
 import scrapy
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 
-class MidiSatinSkirtSpider(scrapy.Spider):
+class MangoSpecificProductSpider(scrapy.Spider):
     name = 'single_site_product_scraper_int'
     allowed_domains = ['shop.mango.com']
     start_urls = [
@@ -13,10 +15,13 @@ class MidiSatinSkirtSpider(scrapy.Spider):
 
     def parse(self, response):
         driver = webdriver.Chrome()
+        wait = WebDriverWait(driver, 10)
+
         driver.get(response.request.url)
-        time.sleep(1)
-        driver.find_element(By.ID, 'onetrust-accept-btn-handler').click()
-        time.sleep(1.5)
+
+        wait.until(EC.element_to_be_clickable((By.ID, 'onetrust-accept-btn-handler'))).click()
+        time.sleep(5)
+
         driver.find_element(By.CLASS_NAME, 'icon.closeModal.icon__close.desktop.confirmacionPais').click()
 
         name = driver.find_element(By.CLASS_NAME, 'product-name').text

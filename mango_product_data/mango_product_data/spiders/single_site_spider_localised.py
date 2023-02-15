@@ -6,7 +6,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 
-class MidiSatinSkirtSpider(scrapy.Spider):
+def float_conversion_with_coma_replacement(string):
+    if ',' in string:
+        return float(string.replace(',', '.'))
+
+    return float(string)
+
+
+class MangoSpecificProductSpiderLoc(scrapy.Spider):
     name = 'single_site_product_scraper_loc'
     allowed_domains = ['shop.mango.com']
     start_urls = [
@@ -14,27 +21,23 @@ class MidiSatinSkirtSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        self.driver = webdriver.Chrome()
-        wait = WebDriverWait(self.driver, 10)
-        self.driver.get(response.request.url)
-        time.sleep(1)
-        self.driver.find_element(By.ID, 'onetrust-accept-btn-handler').click()
-        time.sleep(1.5)
+        driver = webdriver.Chrome()
+        wait = WebDriverWait(driver, 10)
 
-        language = self.driver.find_element(By.XPATH, ".//div[@class='modalForm__lang modalFormLang']/a").text
+        driver.get(response.request.url)
+
+        wait.until(EC.element_to_be_clickable((By.ID, 'onetrust-accept-btn-handler'))).click()
+        time.sleep(5)
+
+        language = driver.find_element(By.XPATH, ".//div[@class='modalForm__lang modalFormLang']/a").text
         wait.until(EC.element_to_be_clickable((By.LINK_TEXT, language))).click()
-        time.sleep(10)
+        time.sleep(5)
 
-        name = self.driver.find_element(By.CLASS_NAME, 'product-name').text
-        # print(f"{80 * '*'}")
-
-        price = self.driver.find_element(By.CLASS_NAME, 'sr-only').get_attribute("innerHTML")
-        if ',' in price:
-            price = float(price[16:].replace(',', '.'))
-        else:
-            price = float(price[16:])
-        color = self.driver.find_element(By.CLASS_NAME, 'colors-info-name').text
-        sizes_selector_list = self.driver.find_elements(By.XPATH, './/div[@class="size-selector-container"]/div/ul/li')
+        name = driver.find_element(By.CLASS_NAME, 'product-name').text
+        price = driver.find_element(By.CLASS_NAME, 'sr-only').get_attribute("innerHTML")[16:]
+        price = float_conversion_with_coma_replacement(price)
+        color = driver.find_element(By.CLASS_NAME, 'colors-info-name').text
+        sizes_selector_list = driver.find_elements(By.XPATH, './/div[@class="size-selector-container"]/div/ul/li')
         available_sizes = [li.find_element(By.CSS_SELECTOR, 'span').text for li in sizes_selector_list]
 
         yield {
