@@ -13,7 +13,7 @@ Spiders do folowing :
 - collect the data,
 - output the data as json file, in folowing format:
 {
-"localisation": String, # only for localised version
+"language": String, # only for localised version
 "name": String,
 "price": Double,
 "color": String,
