@@ -7,7 +7,7 @@ import time
 
 
 class MidiSatinSkirtSpider(scrapy.Spider):
-    name = 'localised_language_one_object_scraper'
+    name = 'single_site_product_scraper_loc'
     allowed_domains = ['shop.mango.com']
     start_urls = [
         'https://shop.mango.com/gb/women/skirts-midi/midi-satin-skirt_17042020.html?c=99',
@@ -29,13 +29,16 @@ class MidiSatinSkirtSpider(scrapy.Spider):
         # print(f"{80 * '*'}")
 
         price = self.driver.find_element(By.CLASS_NAME, 'sr-only').get_attribute("innerHTML")
-        price = float(price[16:].replace(',', '.'))
+        if ',' in price:
+            price = float(price[16:].replace(',', '.'))
+        else:
+            price = float(price[16:])
         color = self.driver.find_element(By.CLASS_NAME, 'colors-info-name').text
         sizes_selector_list = self.driver.find_elements(By.XPATH, './/div[@class="size-selector-container"]/div/ul/li')
         available_sizes = [li.find_element(By.CSS_SELECTOR, 'span').text for li in sizes_selector_list]
 
         yield {
-            'language': language,
+            'loc-language': language,
             'name': name,
             'price': price,
             'color': color,

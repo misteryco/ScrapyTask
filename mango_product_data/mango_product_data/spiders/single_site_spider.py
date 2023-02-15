@@ -5,7 +5,7 @@ import time
 
 
 class MidiSatinSkirtSpider(scrapy.Spider):
-    name = 'single_site_object_scraper'
+    name = 'single_site_product_scraper_int'
     allowed_domains = ['shop.mango.com']
     start_urls = [
         'https://shop.mango.com/gb/women/skirts-midi/midi-satin-skirt_17042020.html?c=99',
