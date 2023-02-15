@@ -1,3 +1,3 @@
 venv
 /mango_product_data/mango_product_data/spiders/geckodriver.log
-/mango_product_data/mango_product_data/spiders/test_spider_one.py
+/mango_product_data/mango_product_data/spiders/test_spider.py
