@@ -16,8 +16,11 @@ Spiders do folowing :
 {
 "loc-language": String, # only for localised version
 "name": String,
+
 "price": Double,
+
 "color": String,
+
 "size": Array,
 }
 
