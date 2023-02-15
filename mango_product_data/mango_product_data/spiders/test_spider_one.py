@@ -8,7 +8,7 @@ class MidiSatinSkirtSpider(scrapy.Spider):
     name = 'one_object_scraper'
     allowed_domains = ['shop.mango.com']
     start_urls = [
-        'add your url here',
+        'https://shop.mango.com/gb/women/skirts-midi/midi-satin-skirt_17042020.html?c=99',
     ]
 
     def parse(self, response):
@@ -20,7 +20,14 @@ class MidiSatinSkirtSpider(scrapy.Spider):
         self.driver.find_element(By.CLASS_NAME, 'icon.closeModal.icon__close.desktop.confirmacionPais').click()
 
         name = self.driver.find_element(By.CLASS_NAME, 'product-name').text
-        # price = float(self.driver.find_element(By.CLASS_NAME, 'product-sale').text[1:])
+
+        # price = self.driver.find_element(By.XPATH, "//span [@class='sr-only' and contains(text(),\ 'Текуща цена лв. '").text
+        # price = self.driver.find_element(By.XPATH, "//span [@class='sr-only' and contains(., 'Текуща цена лв. '").text
+        ## price = self.driver.find_element(By.XPATH, "//span[@class='sr-only' and contains(., 'Текуща цена лв. ')]").text
+
+        price = self.driver.find_element(By.CLASS_NAME, 'sr-only').get_attribute("innerHTML")
+        price = float(price[16:])
+        # print(price)
         # price = float(self.driver.find_element(By.CLASS_NAME, 'sr-only').text)
         color = self.driver.find_element(By.CLASS_NAME, 'colors-info-name').text
         # size_selector_list = self.driver.find_elements(By.XPATH, 'PL1La X4g20')
@@ -29,7 +36,7 @@ class MidiSatinSkirtSpider(scrapy.Spider):
 
         yield {
             'name': name,
-            # 'price': price,
+            'price': price,
             'color': color,
             # 'size': size_selector_list
         }
