@@ -29,9 +29,12 @@ Spiders do folowing :
 }
 
 How to build:
+
 In a new vnv:
 
 - pip install requirements.txt
+
+how to use:
 
 In  "mango_product_data" folder run:
 
