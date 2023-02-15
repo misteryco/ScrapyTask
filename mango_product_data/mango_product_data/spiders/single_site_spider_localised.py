@@ -7,7 +7,7 @@ import time
 
 
 class MidiSatinSkirtSpider(scrapy.Spider):
-    name = 'bulgarian_language_one_object_scraper'
+    name = 'localised_language_one_object_scraper'
     allowed_domains = ['shop.mango.com']
     start_urls = [
         'https://shop.mango.com/gb/women/skirts-midi/midi-satin-skirt_17042020.html?c=99',
@@ -21,7 +21,7 @@ class MidiSatinSkirtSpider(scrapy.Spider):
         self.driver.find_element(By.ID, 'onetrust-accept-btn-handler').click()
         time.sleep(1.5)
 
-        language = self.driver.find_element(By.XPATH, ".//div/a[@data-lang='bg']").text
+        language = self.driver.find_element(By.XPATH, ".//div[@class='modalForm__lang modalFormLang']/a").text
         wait.until(EC.element_to_be_clickable((By.LINK_TEXT, language))).click()
         time.sleep(10)
 
