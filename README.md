@@ -34,7 +34,8 @@ In a new vnv:
 
 - pip install requirements.txt
 
-how to use:
+
+HOW TO USE:
 
 In  "mango_product_data" folder run:
 
