@@ -3,12 +3,7 @@ Simple Scrapy spider
 The spider works for:
 "https://shop.mango.com/bg-en/women/skirts-midi/midi-satin-skirt_17042020.html?c=99"
 
-there are two working scrapers:
-- int version "single_site_spider" - this version skip location choice on the site.
-
-- localised version "single_site_spider_localised" - this version chose proposed by site localization ( left choice button on site ).
-
-Spiders do folowing :
+This spider do folowing :
 
 - parse of the html
 - collect the data,
@@ -16,7 +11,7 @@ Spiders do folowing :
 
 {
 
-"loc-language": String,      # only in localised version
+"loc-language": String,
 
 "name": String,
 
