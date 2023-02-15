@@ -26,13 +26,16 @@ class MangoSpecificProductSpiderLoc(scrapy.Spider):
 
         driver.get(response.request.url)
 
+        # accept cookies
         wait.until(EC.element_to_be_clickable((By.ID, 'onetrust-accept-btn-handler'))).click()
         time.sleep(5)
 
+        # choose default localisation country
         language = driver.find_element(By.XPATH, ".//div[@class='modalForm__lang modalFormLang']/a").text
         wait.until(EC.element_to_be_clickable((By.LINK_TEXT, language))).click()
         time.sleep(5)
 
+        # fetch product data
         name = driver.find_element(By.CLASS_NAME, 'product-name').text
         price = driver.find_element(By.CLASS_NAME, 'sr-only').get_attribute("innerHTML")[16:]
         price = float_conversion_with_coma_replacement(price)
